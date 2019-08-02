@@ -87,3 +87,11 @@ font-size: 0;
 	color: #F15B31;
 	font-weight: 700;
 }
+
+button {
+	font-family: "Raleway", sans-serif;
+	height: 30px;
+	width: 60px;
+	border: 2px solid black;
+	margin-top: 15px;
+}
