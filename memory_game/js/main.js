@@ -1,11 +1,34 @@
+var cards = [
+	{
+		rank: "queen",
+		suit: "diamonds",
+		cardImage: "images/queen-of-diamonds.png"
+	},
+	{
+		rank: "queen",
+		suit: "hearts",
+		cardImage: "images/queen-of-hearts.png"
+	},
+	{
+		rank: "king",
+		suit: "diamonds",
+		cardImage: "images/king-of-diamonds.png"
+	},
+	{
+		rank: "king",
+		suit: "hearts",
+		cardImage: "images/king-of-hearts.png"
+	}
+];
+
 var cardsInPlay = [];
 document.querySelector("#QoD").onclick = function(e) {
 	if(e.target.className === "flipped") {
 		flipCardsBack(e.target);
 	} else {
 		flipCard(e.target);
-		cardsInPlay.push("Queen");
-		console.log("User flipped " + cardsInPlay[cardsInPlay.length-1]);
+		cardsInPlay.push(cards[0].rank);
+		console.log("User flipped " + cards[0].rank + " of " + cards[0].suit);
 		checkForPair(e.target);
 	}
 }
@@ -15,8 +38,8 @@ document.querySelector("#QoH").onclick = function(e) {
 	}
 	else {
 		flipCard(e.target);
-		cardsInPlay.push("Queen");
-		console.log("User flipped " + cardsInPlay[cardsInPlay.length-1]);
+		cardsInPlay.push(cards[1].rank);
+		console.log("User flipped " + cards[1].rank + " of " + cards[1].suit);
 		checkForPair(e.target);
 	}}
 document.querySelector("#KoD").onclick = function(e) {
@@ -25,8 +48,8 @@ document.querySelector("#KoD").onclick = function(e) {
 	}
 	else {
 		flipCard(e.target);
-		cardsInPlay.push("King");
-		console.log("User flipped " + cardsInPlay[cardsInPlay.length-1]);
+		cardsInPlay.push(cards[2].rank);
+		console.log("User flipped " + cards[2].rank + " of " + cards[2].suit);
 		checkForPair(e.target);
 	}
 }
@@ -36,8 +59,8 @@ document.querySelector("#KoH").onclick = function(e) {
 	}
 	else {
 		flipCard(e.target);
-		cardsInPlay.push("King");
-		console.log("User flipped " + cardsInPlay[cardsInPlay.length-1]);
+		cardsInPlay.push(cards[3].rank);
+		console.log("User flipped " + cards[3].rank + " of " + cards[3].suit);
 		checkForPair(e.target);
 	}
 }
@@ -64,14 +87,12 @@ function flipCardsBack(selectedCard) {
 function checkForPair(card) {
 	if(cardsInPlay.length === 2) {
 		if(cardsInPlay[0] === cardsInPlay[1]) {
-			card.parentNode.removeChild(document.querySelector(".flipped"));
-			card.parentNode.removeChild(document.querySelector(".flipped"));
-			console.log("You found a pair!");
+			alert("You found a match!");
 			cardsInPlay = [];
 
 		}
 		else {
-			console.log("You did not find a pair.")
+			alert("You did not find a match.")
 			flipCardsBack(document.querySelector(".flipped"));
 			flipCardsBack(document.querySelector(".flipped"));
 			cardsInPlay = [];
