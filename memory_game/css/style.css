@@ -90,8 +90,8 @@ font-size: 0;
 
 button {
 	font-family: "Raleway", sans-serif;
-	height: 30px;
-	width: 60px;
+	height: 40px;
+	width: 100px;
 	border: 2px solid black;
 	margin-top: 15px;
 }
