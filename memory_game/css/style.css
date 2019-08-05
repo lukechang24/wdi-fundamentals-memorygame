@@ -40,7 +40,7 @@ h1 {
 	margin: 0;
 }
 
-main {
+main p {
 	width: 850px;
 	margin: 35px auto;
 }
@@ -93,5 +93,21 @@ button {
 	height: 40px;
 	width: 100px;
 	border: 2px solid black;
-	margin-top: 15px;
 }
+
+#reset-button {
+	margin: 20px 0px 20px;
+}
+
+#flipCardsDown-button {
+	width: 150px;
+}
+
+#number-of-cards {
+	text-align: center;
+	display: inline;
+	border: 2px solid black;
+	width: 20px;
+}
+
+
