@@ -1,14 +1,37 @@
 var startButton = document.getElementById("start-button");
 var resetButton = document.getElementById("reset-button");
+var colorList = document.getElementById("color-list");
 var flipCardsDownButton = document.getElementById("flipCardsDown-button");
 var inputTextbox = document.getElementById("number-of-cards");
 let numberOfCards;
 let randomNumbers;
+let cardColors = "images/gray_back.jpg";
+
+colorList.addEventListener("click", function(e) {
+	var grayButton = document.getElementById("gray");
+	var redButton = document.getElementById("red");
+	var yellowButton = document.getElementById("yellow");
+	var blueButton = document.getElementById("blue");
+	var purpleButton = document.getElementById("purple");
+	if(e.target.id === "gray") {
+		cardColors = "images/gray_back.jpg"
+	} else if(e.target.id === "red") {
+		cardColors = "images/red_back.jpg"
+	} else if(e.target.id === "yellow") {
+		cardColors = "images/yellow_back.jpg"
+	} else if(e.target.id === "blue") {
+		cardColors = "images/blue_back.jpg"
+	} else if(e.target.id === "purple") {
+		cardColors = "images/purple_back.jpg"
+	}
+})
 
 resetButton.addEventListener("click", function(e) {
 	var inputText = document.getElementById("number-of-cards");
 	numberOfCards = inputText.value;
 	resetBoard();
+	document.getElementById("failed").style.visibility = "hidden";
+	document.getElementById("success").style.visibility = "hidden";
 })
 
 function createBoard() {
@@ -47,7 +70,6 @@ function createBoard() {
 	}
 	randomNumbers = generateRan();
 	createBoard();
-	inputText.value = "";
 }
 
 startButton.addEventListener("click", function() {
@@ -72,13 +94,14 @@ startButton.addEventListener("click", function() {
 	resetButton.style.visibility = "visible";
 });
 flipCardsDownButton.addEventListener("click", function() {
+	document.getElementById("failed").style.visibility = "hidden";
+	document.getElementById("success").style.visibility = "hidden";
 	var flippedCards = document.querySelectorAll(".flipped");
 	for(var i = 0; i < numberOfCards; i++) {
-		flippedCards[i].setAttribute("src", "images/gray_back.jpg");
+		flippedCards[i].setAttribute("src", cardColors);
 		flippedCards[i].setAttribute("class", "face-down");
 	}
-})
-
+});
 
 var cardsInPlay = [];
 
@@ -86,7 +109,7 @@ function flipCard() {
 	this.src = this.alt;
 	if(this.className === "face-down") {
 		this.setAttribute("class", "flipped");
-		for(var i = 0; i < cards.length; i++) {
+		for(var i = 0; i < numberOfCards; i++) {
 			if(this.id === cards[randomNumbers[i]].id) {
 				cardsInPlay.push(cards[randomNumbers[i]].rank);
 				console.log("User flipped " + cards[randomNumbers[i]].rank + " of " + cards[randomNumbers[i]].suit);
@@ -103,9 +126,13 @@ function checkForPair(card) {
 			console.log("You found a match! Keep going!");
 			document.querySelectorAll(".flipped")[1].setAttribute("class", "matched");
 			document.querySelectorAll(".flipped")[0].setAttribute("class", "matched");
+			if(document.querySelectorAll(".matched").length === parseInt(numberOfCards)) {
+				document.getElementById("success").style.visibility = "visible";
+				return;
+			}
 		}
 		else {
-			alert("You did not find a match. You may try again or press reset for a new board.");
+			document.getElementById("failed").style.visibility = "visible";
 			console.log("You did not find a match. You may try again or press reset for a new board.");
 			var flippedCards = document.querySelectorAll("img");
 			for(var i = 0; i < numberOfCards; i++) {
