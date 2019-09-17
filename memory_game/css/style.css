@@ -123,8 +123,8 @@ button {
 #color-list {
 	list-style-type: none;
 	position: absolute;
-	left: 15%;
-	top: 30%;
+	left: 5%;
+	bottom: 20%;
 }
 
 .card-colors {

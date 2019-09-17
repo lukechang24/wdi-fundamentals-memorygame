@@ -1,18 +1,18 @@
-var startButton = document.getElementById("start-button");
-var resetButton = document.getElementById("reset-button");
-var colorList = document.getElementById("color-list");
-var flipCardsDownButton = document.getElementById("flipCardsDown-button");
-var inputTextbox = document.getElementById("number-of-cards");
+const startButton = document.getElementById("start-button");
+const resetButton = document.getElementById("reset-button");
+const colorList = document.getElementById("color-list");
+const flipCardsDownButton = document.getElementById("flipCardsDown-button");
+const inputTextbox = document.getElementById("number-of-cards");
 let numberOfCards;
 let randomNumbers;
 let cardColors = "images/gray_back.jpg";
 
 colorList.addEventListener("click", function(e) {
-	var grayButton = document.getElementById("gray");
-	var redButton = document.getElementById("red");
-	var yellowButton = document.getElementById("yellow");
-	var blueButton = document.getElementById("blue");
-	var purpleButton = document.getElementById("purple");
+	const grayButton = document.getElementById("gray");
+	const redButton = document.getElementById("red");
+	const yellowButton = document.getElementById("yellow");
+	const blueButton = document.getElementById("blue");
+	const purpleButton = document.getElementById("purple");
 	if(e.target.id === "gray") {
 		cardColors = "images/gray_back.jpg"
 	} else if(e.target.id === "red") {
@@ -27,7 +27,7 @@ colorList.addEventListener("click", function(e) {
 })
 
 resetButton.addEventListener("click", function(e) {
-	var inputText = document.getElementById("number-of-cards");
+	const inputText = document.getElementById("number-of-cards");
 	numberOfCards = inputText.value;
 	resetBoard();
 	document.getElementById("failed").style.visibility = "hidden";
@@ -35,8 +35,8 @@ resetButton.addEventListener("click", function(e) {
 })
 
 function createBoard() {
-	for(var i = 0; i < numberOfCards; i++) {
-		var cardElement = document.createElement("img");
+	for(const i = 0; i < numberOfCards; i++) {
+		const cardElement = document.createElement("img");
 		cardElement.setAttribute("src", cards[randomNumbers[i]].cardImage);
 		cardElement.setAttribute("id", cards[randomNumbers[i]].id);
 		cardElement.setAttribute("alt", cards[randomNumbers[i]].cardImage);
@@ -47,7 +47,7 @@ function createBoard() {
 	}
 }
  function resetBoard() {
- 	var inputText = document.getElementById("number-of-cards");
+ 	const inputText = document.getElementById("number-of-cards");
 	if(inputText.value === "2" || inputText.value === "4" || inputText.value === "6") {
 		alert("Even babies can figure this out. Choose a higher number.");
 		inputText.value = "";
@@ -63,8 +63,8 @@ function createBoard() {
 		inputText.value = "";
 		return;
 	}
- 	var gameBoard = document.getElementById("game-board")
- 	var cards = document.getElementsByTagName("img");
+ 	const gameBoard = document.getElementById("game-board")
+ 	const cards = document.getElementsByTagName("img");
 	while(cards.length > 0) {
 		gameBoard.removeChild(document.querySelector("img"));
 	}
@@ -73,7 +73,7 @@ function createBoard() {
 }
 
 startButton.addEventListener("click", function() {
-	var inputText = document.getElementById("number-of-cards");
+	const inputText = document.getElementById("number-of-cards");
 	if(inputText.value === "2" || inputText.value === "4") {
 		alert("Even babies can figure this out. Choose a higher number.");
 		return;
@@ -96,20 +96,20 @@ startButton.addEventListener("click", function() {
 flipCardsDownButton.addEventListener("click", function() {
 	document.getElementById("failed").style.visibility = "hidden";
 	document.getElementById("success").style.visibility = "hidden";
-	var flippedCards = document.querySelectorAll(".flipped");
-	for(var i = 0; i < numberOfCards; i++) {
+	const flippedCards = document.querySelectorAll(".flipped");
+	for(const i = 0; i < numberOfCards; i++) {
 		flippedCards[i].setAttribute("src", cardColors);
 		flippedCards[i].setAttribute("class", "face-down");
 	}
 });
 
-var cardsInPlay = [];
+const cardsInPlay = [];
 
 function flipCard() {
 	this.src = this.alt;
 	if(this.className === "face-down") {
 		this.setAttribute("class", "flipped");
-		for(var i = 0; i < numberOfCards; i++) {
+		for(const i = 0; i < numberOfCards; i++) {
 			if(this.id === cards[randomNumbers[i]].id) {
 				cardsInPlay.push(cards[randomNumbers[i]].rank);
 				console.log("User flipped " + cards[randomNumbers[i]].rank + " of " + cards[randomNumbers[i]].suit);
@@ -134,8 +134,8 @@ function checkForPair(card) {
 		else {
 			document.getElementById("failed").style.visibility = "visible";
 			console.log("You did not find a match. You may try again or press reset for a new board.");
-			var flippedCards = document.querySelectorAll("img");
-			for(var i = 0; i < numberOfCards; i++) {
+			const flippedCards = document.querySelectorAll("img");
+			for(const i = 0; i < numberOfCards; i++) {
 				flippedCards[i].setAttribute("src", cards[randomNumbers[i]].cardImage);
 				flippedCards[i].setAttribute("class", "flipped");
 				cardsInPlay = [];
@@ -145,10 +145,10 @@ function checkForPair(card) {
 }
 
 function generateRan() {
-	var max = numberOfCards;
-  	var random = [];
-  	for(var i = 0; i < numberOfCards; i++) {
-    	var temp = Math.floor(Math.random() * max);
+	const max = numberOfCards;
+  	const random = [];
+  	for(const i = 0; i < numberOfCards; i++) {
+    	const temp = Math.floor(Math.random() * max);
     	if(random.indexOf(temp) == -1){
       		random.push(temp);
     	} else { 
@@ -158,7 +158,7 @@ function generateRan() {
   	return random;
 }
 
-var cards = [
+const cards = [
 	{
 		rank: "two",
 		suit: "diamonds",
